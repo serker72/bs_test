@@ -1,16 +1,14 @@
-# Set document root to be "basic/web"
-#DocumentRoot "/web"
-Options +FollowSymLinks
-IndexIgnore */*
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+</IfModule>
 
-#<Directory "/web">
-    # use mod_rewrite for pretty URL support
-    RewriteEngine on
-    # If a directory or a file exists, use the request directly
-    RewriteCond %{REQUEST_FILENAME} !-f
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_URI} ^/.*
+    RewriteRule ^(.*)$ /web/$1 [L]
+
+    RewriteCond %{REQUEST_URI} !^/web/
+    RewriteCond %{REQUEST_FILENAME} !-f [OR]
     RewriteCond %{REQUEST_FILENAME} !-d
-    # Otherwise forward the request to index.php
-    RewriteRule . /web/index.php
-
-    # ...other settings...
-#</Directory>
+    RewriteRule ^.*$ /web/index.php
+</IfModule> 
