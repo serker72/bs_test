@@ -122,4 +122,54 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    
+    // Всплывшее модальное окно заполняем представлением signup.php формы с полями
+    public function actionShowClaim($id)
+    {
+            $model = new \app\models\Claim($id);
+            //$model->id =$userid;
+            
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => (string) $model->_id]);
+        }elseif (Yii::$app->request->isAjax) {
+            return $this->renderAjax('claim', [
+                        'model' => $model
+            ]);
+        } else {
+            return $this->render('claim', [
+                        'model' => $model
+            ]);
+        }
+    }
+
+    // По нажатию в модальном окне на Отправить - форма отправляется администратору на почту     
+    public function actionSubmitclaim()
+    {
+            $model = new \app\models\Claim();
+
+            /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+                //save the password
+                $success=true;
+                return json_encode($success);
+            }
+            else
+            {
+                $success=false;
+                return json_encode($success);
+            }*/
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            if($model->save()) {
+                    //return $this->redirect('/site/confirm');
+                $success=true;
+                return json_encode($success);
+            } else { 
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
+            
+            return $this->renderAjax('claim', ['model' => $model]);
+        }
+    }    
 }

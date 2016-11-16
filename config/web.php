@@ -39,14 +39,17 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        
+        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                //'claim' => 'site/showclaim',
+                //'submitclaim' => 'site/submitclaim',
+                '<controller>/<action>' => '<controller>/<action>',
             ],
         ],
-        
+        */
     ],
     'params' => $params,
 ];
@@ -61,6 +64,7 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
+        'allowedIPs' => ['127.0.0.1', '192.168.1.4']
     ];
 }
 

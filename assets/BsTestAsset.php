@@ -40,5 +40,6 @@ class BsTestAsset extends AssetBundle {
         'js/jquery.easing.min.js',
         'js/scrolling-nav.js',
         'js/jquery.nav.js',
+        'js/bs_main.js',
     ];
 }

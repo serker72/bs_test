@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\BsTestAsset;
+use yii\widgets\ActiveForm;
 
 AppAsset::register($this);
 BsTestAsset::register($this);
@@ -258,7 +259,7 @@ BsTestAsset::register($this);
                             <li>EXTENSIVE DOCUMENTATION</li>
                         </ul>
                         <div class="pricing-table-button">
-                            <a href="#" class="btn btn-primary md">BUY NOW</a>
+                            <a href="#my-modal" class="btn btn-primary md" data-toggle="modal">BUY NOW</a>
                         </div>
                     </div>
                 </div><!-- / pricing-table -->
@@ -285,7 +286,7 @@ BsTestAsset::register($this);
                             <li>EXTENSIVE DOCUMENTATION</li>
                         </ul>
                         <div class="pricing-table-button">
-                            <a href="#" class="btn btn-primary md">BUY NOW</a>
+                            <a href="#my-modal" class="btn btn-primary md" data-toggle="modal">BUY NOW</a>
                         </div>
                     </div>
                 </div><!-- / pricing-table -->
@@ -312,7 +313,7 @@ BsTestAsset::register($this);
                             <li>EXTENSIVE DOCUMENTATION</li>
                         </ul>
                         <div class="pricing-table-button">
-                            <a href="#" class="btn btn-primary md">BUY NOW</a>
+                            <a href="#my-modal" class="btn btn-primary md" data-toggle="modal">BUY NOW</a>
                         </div>
                     </div>
                 </div><!-- / pricing-table -->
@@ -453,24 +454,38 @@ BsTestAsset::register($this);
 <!-- scroll to top -->
 <a href="#home" class="scroll-to-top page-scroll"><i class="fa fa-angle-up"></i></a>
 <!-- / scroll to top -->
+<!---------------------------------------------------------------------------------------------------------------->
+<?php $model = new \app\models\Claim(); ?>
+<!-- Modal "Buy Now" -->
+<div class="modal fade" id="my-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <div id="success"> </div> <!-- For success message -->
+                
+                <div class="claim-form-wrapper">
+                    <?php $form = ActiveForm::begin(['options' => ['class' => 'claim-form']]); ?>
 
+                    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+
+                    <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
+
+                    <div class="form-group">
+                        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                    </div>
+
+                    <?php ActiveForm::end(); ?>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <!-- javascript -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<!-- javascript plugins -->
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.shuffle.min.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/validator.min.js" type="text/javascript"></script>
-<script src="js/form-scripts.js" type="text/javascript"></script>
-<script src="js/sticky-nav.js"></script>
-<script src="js/jquery.easing.min.js"></script>
-<script src="js/scrolling-nav.js"></script>
-<script src="js/jquery.nav.js"></script>
 <!-- scripts -->
 <!-- nav scroll -->    
-<?php $this->registerJsFile('js/bs_main.js'); ?>
+<?php //$this->registerJsFile('js/bs_main.js'); ?>
 <!-- / nav scroll -->
 <!---------------------------------------------------------------------------------------------------------------->
     
