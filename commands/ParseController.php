@@ -25,7 +25,16 @@ class ParseController extends \yii\console\Controller
      */
     public function actionIndex($url = 'http://krd.antiagent.ru/index.html?Type=RENT&Category=APARTMENT')
     {
-        $dataParse = \Yii::$app->parser->loadUsingCurl($url);
-        echo var_dump($dataParse);
+        $dataParse = \Yii::$app->parser->loadUsingCurl($url)
+            ->createDomDocument()
+            ->createDomXpath()
+            ->parseAdsInPage()
+            ->saveAdsItemsToTable()
+            ->endParse();
+        
+        //return $this->render('index', ['data' => $dataParse]);                
+                
+        //echo var_dump($dataParse);
+        //echo $dataParse->getContent();
     }
 }

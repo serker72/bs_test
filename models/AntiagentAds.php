@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "{{%antiagent_ads}}".
@@ -85,4 +86,22 @@ class AntiagentAds extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
         ];
     }
+    
+    
+    /**
+     * @return boolean
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->created_at = new Expression('NOW()');
+            }
+            
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }
