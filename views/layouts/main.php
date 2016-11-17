@@ -465,7 +465,11 @@ BsTestAsset::register($this);
                 <div id="success"> </div> <!-- For success message -->
                 
                 <div class="claim-form-wrapper">
-                    <?php $form = ActiveForm::begin(['options' => ['class' => 'claim-form']]); ?>
+                    <?php $form = ActiveForm::begin([
+                        'id' => 'claim-form',
+                        //'enableAjaxValidation' => true,                        
+                        'options' => ['class' => 'claim-form'],
+                    ]); ?>
 
                     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 

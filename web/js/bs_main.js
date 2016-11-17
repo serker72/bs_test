@@ -50,7 +50,8 @@ $(document).ready(function() {
                     }, 4000);
                 }
                 else {
-                    modalBody.html(result).hide().fadeIn();
+                    //return false;
+                    //modalBody.html(result).hide().fadeIn();
                 }
             }
         });

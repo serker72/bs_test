@@ -3,18 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Claim;
+use app\models\AntiagentAds;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Response;
-use yii\widgets\ActiveForm;
 
 /**
- * ClaimController implements the CRUD actions for Claim model.
+ * AntiagentadsController implements the CRUD actions for AntiagentAds model.
  */
-class ClaimController extends Controller
+class AntiagentadsController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,13 +30,13 @@ class ClaimController extends Controller
     }
 
     /**
-     * Lists all Claim models.
+     * Lists all AntiagentAds models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Claim::find(),
+            'query' => AntiagentAds::find(),
         ]);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class ClaimController extends Controller
     }
 
     /**
-     * Displays a single Claim model.
+     * Displays a single AntiagentAds model.
      * @param integer $id
      * @return mixed
      */
@@ -59,38 +57,25 @@ class ClaimController extends Controller
     }
 
     /**
-     * Creates a new Claim model.
+     * Creates a new AntiagentAds model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Claim();
+        $model = new AntiagentAds();
 
-        if (Yii::$app->request->isAjax) {
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                $success = 1;
-                return json_encode($success);            
-            } else {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ActiveForm::validate($model);
-            }
-            //return $this->renderAjax('view', ['model' => $model]);
-        } else {        
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-                //$success=true;
-                //return json_encode($success);            
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
     }
 
     /**
-     * Updates an existing Claim model.
+     * Updates an existing AntiagentAds model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -109,7 +94,7 @@ class ClaimController extends Controller
     }
 
     /**
-     * Deletes an existing Claim model.
+     * Deletes an existing AntiagentAds model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -122,15 +107,15 @@ class ClaimController extends Controller
     }
 
     /**
-     * Finds the Claim model based on its primary key value.
+     * Finds the AntiagentAds model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Claim the loaded model
+     * @return AntiagentAds the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Claim::findOne($id)) !== null) {
+        if (($model = AntiagentAds::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

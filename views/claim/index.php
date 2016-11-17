@@ -15,7 +15,7 @@ $this->context->layout = 'main_0';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Claim'), ['create'], ['class' => 'btn btn-success']) ?>
+        <!--?= Html::a(Yii::t('app', 'Create Claim'), ['create'], ['class' => 'btn btn-success']) ?-->
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,

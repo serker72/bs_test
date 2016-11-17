@@ -32,8 +32,8 @@ class Claim extends \yii\db\ActiveRecord
             [['text', 'phone'], 'required'],
             [['text'], 'string'],
             [['created_at'], 'safe'],
-            [['phone'], 'string', 'max' => 255],
-            [['phone'], 'validatePhoneEmpty', 'skipOnEmpty'=> false],
+            [['phone'], 'string', 'min' => 7, 'max' => 255],
+            //[['phone'], 'validatePhoneEmpty', 'skipOnEmpty'=> false],
         ];
     }
 
