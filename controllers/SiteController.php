@@ -172,4 +172,10 @@ class SiteController extends Controller
             return $this->renderAjax('claim', ['model' => $model]);
         }
     }    
+    
+    public function actionRunparse()
+    {
+        \Yii::$app->consoleRunner->run('parse');
+    }
+    
 }

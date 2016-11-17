@@ -50,6 +50,10 @@ $config = [
             ],
         ],
         */
+        'consoleRunner' => [
+            'class' => 'vova07\console\ConsoleRunner',
+            'file' => '/home/bs_test.su/www/yii' // or an absolute path to console file
+        ]        
     ],
     'params' => $params,
 ];

@@ -25,6 +25,10 @@ class ComposerStaticInit84d676133d2502d132fe7b8874ff4260
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
         ),
+        'v' => 
+        array (
+            'vova07\\console\\' => 15,
+        ),
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
@@ -94,6 +98,10 @@ class ComposerStaticInit84d676133d2502d132fe7b8874ff4260
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'vova07\\console\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vova07/yii2-console-runner-extension',
         ),
         'cebe\\markdown\\' => 
         array (
@@ -582,6 +590,7 @@ class ComposerStaticInit84d676133d2502d132fe7b8874ff4260
         'PHP_Token_STRING' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_STRING_CAST' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_STRING_VARNAME' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'PHP_Token_SUPER' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_SWITCH' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_Stream' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token/Stream.php',
         'PHP_Token_Stream_CachingFactory' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token/Stream/CachingFactory.php',
@@ -596,6 +605,7 @@ class ComposerStaticInit84d676133d2502d132fe7b8874ff4260
         'PHP_Token_UNSET' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_UNSET_CAST' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_USE' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'PHP_Token_USE_FUNCTION' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_VAR' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_VARIABLE' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_WHERE' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
