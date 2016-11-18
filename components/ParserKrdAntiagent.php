@@ -131,6 +131,7 @@ class ParserKrdAntiagent extends Object {
     public function parseAdsInPage()
     {
 	$this->_items = [];
+        
         $xpathQuery = "//div[@class='b-serp-item b-ugc-item']";
 	$nodes = $this->_xpath->query($xpathQuery, $this->_dom);
 	if ($nodes->length === 0) {
@@ -142,27 +143,55 @@ class ParserKrdAntiagent extends Object {
         foreach($nodes as $node) {
             $id = $node->getAttribute('id');
             $nodes1 = $this->_xpath->query("//div[@id='$id']//div[@class='b-serp-item__price']//span[@class='b-serp-item__amount']", $this->_dom);
-            $nodes2 = $this->_xpath->query("//div[@id='$id']//div[@class='b-serp-item__price']//a//img", $this->_dom);
+            $nodes2 = $this->_xpath->query("//div[@id='$id']//div[@class='b-serp-item__price']//a//img//@src", $this->_dom);
             $nodes3 = $this->_xpath->query("//div[@id='$id']//div[@class='b-serp-item__header']//a[@class='b-link b-link_redir_yes b-serp-item__offer-link']", $this->_dom);
             $nodes4 = $this->_xpath->query("//div[@id='$id']//div[@class='b-serp-item__address']//div[@class='b-serp-item__address-text']", $this->_dom);
             
             $this->_items[] = [
                 'ads_id' => $id,
                 'ads_price' => str_replace(' ', '', $nodes1->item(0)->nodeValue),
-                //'ads_img_link' => $nodes2->item(0)->src,
+                'ads_img_link' => $nodes2->item(0)->nodeValue,
                 'ads_header' => $nodes3->item(0)->nodeValue,
                 'ads_link' => $nodes3->item(0)->getAttribute('href'),
                 'ads_text' => $nodes4->item(0)->nodeValue,
             ];
         }
         
-        //print_r($this->_items);
+        print_r($this->_items);
         
         //$this->_content = $nodes->item(0)->nodeValue;
 
-	Yii::info(Yii::t('app', 'Parse content'));
+	Yii::info(Yii::t('app', 'Parse ads in page'));
 
 	return $this;        
+    }
+
+    public function parseAdsItemsPage()
+    {
+        foreach ($this->_items as $key => $value) {
+            // Если нет ссылки - проходим мимо
+            if (($value['ads_link'] === NULL) || ($value['ads_link'] == '')) {
+                continue;
+            }
+            
+            // Получаем страницу конкретного объявления
+            $this->loadUsingCurl($value['ads_link'])
+                ->createDomDocument()
+                ->createDomXpath();
+            
+            $xpathQuery = "//div[@class='b-card__content']/div/";
+            $nodes = $this->_xpath->query($xpathQuery, $this->_dom);
+            if ($nodes->length === 0) {
+                Yii::info(Yii::t('app', 'Error parse content page '.$value['ads_link']));
+                continue;
+            }
+            
+        }
+        
+	Yii::info(Yii::t('app', 'Parse ads items page'));
+
+	return $this;        
+        
     }
     
     public function saveAdsItemsToTable()
@@ -178,6 +207,7 @@ class ParserKrdAntiagent extends Object {
             $model->id = $value['ads_id'];
             $model->ads_id = $value['ads_id'];
             $model->ads_price = $value['ads_price'];
+            $model->ads_img_link = $value['ads_img_link'];
             $model->ads_header = $value['ads_header'];
             $model->ads_link = $value['ads_link'];
             $model->ads_text = $value['ads_text'];
