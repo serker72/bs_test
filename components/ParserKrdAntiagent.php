@@ -278,7 +278,7 @@ class ParserKrdAntiagent extends Object {
             $this->_items[] = [
                 'ads_id' => $id,
                 'ads_price' => (int)str_replace(' ', '', $nodes1->item(0)->nodeValue),
-                'ads_img_link' => $nodes2->item(0)->nodeValue,
+                'ads_img_link' => (null !== $nodes2->item(0)) ? $nodes2->item(0)->nodeValue : '',
                 'ads_header' => $nodes3->item(0)->nodeValue,
                 'ads_link' => $nodes3->item(0)->getAttribute('href'),
                 'ads_text' => $nodes4->item(0)->nodeValue,
@@ -380,26 +380,26 @@ class ParserKrdAntiagent extends Object {
             
             $model->id = $value['ads_id'];
             $model->ads_id = $value['ads_id'];
-            $model->ads_price = $value['ads_price'] ? $value['ads_price'] : '';
-            $model->ads_img_link = $value['ads_img_link'] ? $value['ads_img_link'] : '';
-            $model->ads_header = $value['ads_header'] ? $value['ads_header'] : '';
-            $model->ads_link = $value['ads_link'] ? $value['ads_link'] : '';
-            $model->ads_text = $value['ads_text'] ? $value['ads_text'] : '';
-            $model->ads_owner = $value['ads_owner'] ? $value['ads_owner'] : '';
+            $model->ads_price = isset($value['ads_price']) ? $value['ads_price'] : '';
+            $model->ads_img_link = isset($value['ads_img_link']) ? $value['ads_img_link'] : '';
+            $model->ads_header = isset($value['ads_header']) ? $value['ads_header'] : '';
+            $model->ads_link = isset($value['ads_link']) ? $value['ads_link'] : '';
+            $model->ads_text = isset($value['ads_text']) ? $value['ads_text'] : '';
+            $model->ads_owner = isset($value['ads_owner']) ? $value['ads_owner'] : '';
 
-            $model->ads_option_price = $value['ads_option_price'] ? $value['ads_option_price'] : 0;
-            $model->ads_option_owner = $value['ads_option_owner'] ? $value['ads_option_owner'] : '';
-            $model->ads_option_owner_phone = $value['ads_option_owner_phone'] ? $value['ads_option_owner_phone'] : '';
-            $model->ads_option_owner_email = $value['ads_option_owner_email'] ? $value['ads_option_owner_email'] : '';
-            $model->ads_option_dt_create = $value['ads_option_dt_create'] ? $value['ads_option_dt_create'] : '';
-            $model->ads_option_dt_last_update = $value['ads_option_dt_last_update'] ? $value['ads_option_dt_last_update'] : '';
-            $model->ads_option_views = $value['ads_option_views'] ? $value['ads_option_views'] : '';
-            $model->ads_option_district = $value['ads_option_district'] ? $value['ads_option_district'] : '';
-            $model->ads_option_address = $value['ads_option_address'] ? $value['ads_option_address'] : '';
-            $model->ads_option_apartment_area = $value['ads_option_apartment_area'] ? $value['ads_option_apartment_area'] : '';
-            $model->ads_option_floor = $value['ads_option_floor'] ? $value['ads_option_floor'] : '';
-            $model->ads_option_wall_material = $value['ads_option_wall_material'] ? $value['ads_option_wall_material'] : '';
-            $model->ads_option_year_built = $value['ads_option_year_built'] ? $value['ads_option_year_built'] : '';
+            $model->ads_option_price = isset($value['ads_option_price']) ? $value['ads_option_price'] : 0;
+            $model->ads_option_owner = isset($value['ads_option_owner']) ? $value['ads_option_owner'] : '';
+            //$model->ads_option_owner_phone = isset($value['ads_option_owner_phone']) ? $value['ads_option_owner_phone'] : '';
+            //$model->ads_option_owner_email = isset($value['ads_option_owner_email']) ? $value['ads_option_owner_email'] : '';
+            //$model->ads_option_dt_create = isset($value['ads_option_dt_create']) ? $value['ads_option_dt_create'] : '';
+            //$model->ads_option_dt_last_update = isset($value['ads_option_dt_last_update']) ? $value['ads_option_dt_last_update'] : '';
+            //$model->ads_option_views = isset($value['ads_option_views']) ? $value['ads_option_views'] : '';
+            $model->ads_option_district = isset($value['ads_option_district']) ? $value['ads_option_district'] : '';
+            $model->ads_option_address = isset($value['ads_option_address']) ? $value['ads_option_address'] : '';
+            $model->ads_option_apartment_area = isset($value['ads_option_apartment_area']) ? $value['ads_option_apartment_area'] : '';
+            $model->ads_option_floor = isset($value['ads_option_floor']) ? $value['ads_option_floor'] : '';
+            $model->ads_option_wall_material = isset($value['ads_option_wall_material']) ? $value['ads_option_wall_material'] : '';
+            $model->ads_option_year_built = isset($value['ads_option_year_built']) ? $value['ads_option_year_built'] : '';
 
             //print_r($model);
             
