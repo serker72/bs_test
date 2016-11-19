@@ -24,6 +24,7 @@ $config = [
 	'parser' => [
             'class' => 'app\components\ParserKrdAntiagent',
             'host' => 'http://krd.antiagent.ru/index.html?',
+            'link' => 'Type=RENT&Category=APARTMENT',
             'curlOpt' => [
                 'userAgent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36',
                 'header' => [
@@ -55,6 +56,15 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
     ];
+    $config['components']['log']['targets'][] = [
+        'class' => 'yii\log\FileTarget',
+        'levels' => ['info'],
+        'categories' => ['parserInfo'],
+        'logFile' => '@app/runtime/logs/parser.log',
+        'maxFileSize' => 1024 * 2,
+        'maxLogFiles' => 20,
+        'logVars' => [],
+    ];    
 }
 
 return $config;

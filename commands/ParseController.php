@@ -19,16 +19,51 @@ use yii\console\Controller;
  */
 class ParseController extends \yii\console\Controller
 {
+    // Номер стартовой страницы
+    public $start_page = 1;
+    // Количество обрабатываемых страниц
+    public $pages = 0;
+    // Признак предварительной очистки таблицы с результатами
+    public $clear_table = 0;
+    
     /**
-     * This command echoes what you have entered as the message.
-     * @param string $message the message to be echoed.
+     * 
+     * @param type $actionID
+     * @return string
      */
-    public function actionIndex($url = 'http://krd.antiagent.ru/index.html?Type=RENT&Category=APARTMENT')
+    public function options($actionID)
     {
-        $dataParse = \Yii::$app->parser->loadUsingCurl($url)
+        $options = parent::options($actionID);
+        if($actionID == 'index'){
+            $options[] = 'start_page';
+            $options[] = 'pages';
+            $options[] = 'clear_table';
+        }
+        return $options;
+    }    
+    
+    /**
+     * 
+     * @param integer $start_page
+     * @param integer $pages
+     * @param integer $clear_table
+     */
+    public function actionIndex() 
+    {
+        /*var_dump($this->start_page);
+        var_dump($this->pages);
+        var_dump($this->clear_table);*/
+        
+        if ($this->clear_table == 1) {
+            \Yii::$app->db->createCommand()->truncateTable('{{%antiagent_ads}}')->execute();
+        }
+        
+        $dataParse = \Yii::$app->parser->loadUsingCurl()
             ->createDomDocument()
             ->createDomXpath()
-            ->parseAdsInPage()
+            ->parseAdsPages($this->start_page, $this->pages)
+            //->parseAdsInPage()
+            //->parseAdsItemsPage()
             ->saveAdsItemsToTable()
             ->endParse();
         

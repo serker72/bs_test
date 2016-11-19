@@ -32,8 +32,8 @@ class m171115_101812_bst extends Migration
             'ads_option_address' => $this->string()->notNull()->defaultValue(''),
             'ads_option_apartment_area' => $this->string()->notNull()->defaultValue(''),
             'ads_option_floor' => $this->string()->notNull()->defaultValue(''),
-            'ads_option_wall material' => $this->string()->notNull()->defaultValue(''),
-            'ads_option_year built' => $this->string()->notNull()->defaultValue(''),
+            'ads_option_wall_material' => $this->string()->notNull()->defaultValue(''),
+            'ads_option_year_built' => $this->string()->notNull()->defaultValue(''),
             'created_at' => $this->dateTime()->notNull()->defaultValue('0000-00-00 00:00:00'),
         ], $tableOptions);
     }

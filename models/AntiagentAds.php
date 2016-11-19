@@ -52,7 +52,7 @@ class AntiagentAds extends \yii\db\ActiveRecord
             [['ads_text'], 'required'],
             [['ads_text'], 'string'],
             [['created_at'], 'safe'],
-            [['ads_img_link', 'ads_header', 'ads_link', 'ads_owner', 'ads_option_owner', 'ads_option_owner_phone', 'ads_option_owner_email', 'ads_option_dt_create', 'ads_option_dt_last_update', 'ads_option_views', 'ads_option_district', 'ads_option_address', 'ads_option_apartment_area', 'ads_option_floor', 'ads_option_wall material', 'ads_option_year built'], 'string', 'max' => 255],
+            [['ads_img_link', 'ads_header', 'ads_link', 'ads_owner', 'ads_option_owner', 'ads_option_owner_phone', 'ads_option_owner_email', 'ads_option_dt_create', 'ads_option_dt_last_update', 'ads_option_views', 'ads_option_district', 'ads_option_address', 'ads_option_apartment_area', 'ads_option_floor', 'ads_option_wall_material', 'ads_option_year_built'], 'string', 'max' => 255],
         ];
     }
 
@@ -81,7 +81,7 @@ class AntiagentAds extends \yii\db\ActiveRecord
             'ads_option_address' => Yii::t('app', 'Ads Option Address'),
             'ads_option_apartment_area' => Yii::t('app', 'Ads Option Apartment Area'),
             'ads_option_floor' => Yii::t('app', 'Ads Option Floor'),
-            'ads_option_wall material' => Yii::t('app', 'Ads Option Wall Material'),
+            'ads_option_wall_material' => Yii::t('app', 'Ads Option Wall Material'),
             'ads_option_year built' => Yii::t('app', 'Ads Option Year Built'),
             'created_at' => Yii::t('app', 'Created At'),
         ];
