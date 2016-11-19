@@ -93,6 +93,12 @@ class ParserKrdAntiagent extends Object {
 	return $this->host . $this->link . ($this->current_page > 1 ? $this->page_prefix . $this->current_page : '');
     }
 
+    /**
+     * Получение исходного кода страницы с сервера по указанному url
+     * @param type $url
+     * @return \app\components\ParserKrdAntiagent
+     * @throws \Exception
+     */
     public function loadUsingCurl($url=NULL)
     {
         $ch = curl_init();
@@ -120,6 +126,10 @@ class ParserKrdAntiagent extends Object {
         return $this;
     }
 
+    /**
+     * Инициализация объекта DOMDocument
+     * @return \app\components\ParserKrdAntiagent
+     */
     public function createDomDocument()
     {
         $this->_dom = new \DOMDocument();
@@ -134,6 +144,10 @@ class ParserKrdAntiagent extends Object {
         return $this;
     }    
     
+    /**
+     * Инициализация объекта DOMXPath
+     * @return \app\components\ParserKrdAntiagent
+     */
     public function createDomXpath()
     {
         $this->_xpath = new \DOMXPath($this->_dom);
@@ -168,8 +182,8 @@ class ParserKrdAntiagent extends Object {
 
     /**
      * Парсинг необходимого количества страниц
-     * @param type $start_page - стартовая страница
-     * @param type $pages - количество страниц:
+     * @param integer $start_page - стартовая страница
+     * @param integer $pages - количество страниц:
      *    0 - одна страница, 
      *   >0 - количество страниц вправо, начиная с заданной
      *   <0 - количество страниц влево, начиная с заданной
@@ -214,18 +228,22 @@ class ParserKrdAntiagent extends Object {
             }
         }
         
-        print_r($pages_num);
+        //print_r($pages_num);
         
         for($i=0;$i<count($pages_num);$i++) {
             $url = $this->getPageUrl($pages_num[$i]);
             
             Yii::info(Yii::t('app', 'Parse pages') . ' ' . $pages_num[$i] . ', url=' . $url, 'parserInfo');
             
+            // Постраничная запись в таблицу
+            $this->_items = [];
+            
             $this->loadUsingCurl($url)
                 ->createDomDocument()
                 ->createDomXpath()
                 ->parseAdsInPage()
-                ->parseAdsItemsPage();
+                ->parseAdsItemsPage()
+                ->saveAdsItemsToTable();
         }
 
 	Yii::info(Yii::t('app', 'Parse pages completed'), 'parserInfo');
@@ -233,6 +251,10 @@ class ParserKrdAntiagent extends Object {
 	return $this;        
     }
     
+    /**
+     * Парсинг объявлений на странице
+     * @return \app\components\ParserKrdAntiagent
+     */
     public function parseAdsInPage()
     {
 	//$this->_items = [];
@@ -273,6 +295,10 @@ class ParserKrdAntiagent extends Object {
 	return $this;        
     }
 
+    /**
+     * Парсинг страниц объявлений, обнаруженных на странице
+     * @return \app\components\ParserKrdAntiagent
+     */
     public function parseAdsItemsPage()
     {
         // Пробежимся по каждому объявлению
@@ -338,6 +364,10 @@ class ParserKrdAntiagent extends Object {
         
     }
     
+    /**
+     * Запись массива с информацией в таблицу БД
+     * @return \app\components\ParserKrdAntiagent
+     */
     public function saveAdsItemsToTable()
     {
         foreach ($this->_items as $key => $value) {
@@ -377,7 +407,8 @@ class ParserKrdAntiagent extends Object {
             //break;
         }
         
-	Yii::info(Yii::t('app', 'Save parse item to table'), 'parserInfo');
+        echo 'Save parse item to table, ' . count($this->_items) . ' record saved' . PHP_EOL;
+	Yii::info(Yii::t('app', 'Save parse item to table') . ', ' . count($this->_items) . ' record saved', 'parserInfo');
 
 	return $this;        
     }
