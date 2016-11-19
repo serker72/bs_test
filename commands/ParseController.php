@@ -64,7 +64,7 @@ class ParseController extends \yii\console\Controller
             ->parseAdsPages($this->start_page, $this->pages)
             //->parseAdsInPage()
             //->parseAdsItemsPage()
-            ->saveAdsItemsToTable()
+            //->saveAdsItemsToTable()
             ->endParse();
         
         //return $this->render('index', ['data' => $dataParse]);                
